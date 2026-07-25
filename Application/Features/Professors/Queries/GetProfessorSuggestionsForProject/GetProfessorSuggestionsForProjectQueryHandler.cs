@@ -9,7 +9,7 @@ using AcademicGateway.Application.Features.Professors.Queries.SearchProfessors;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace AcademicGateway.Application.Features.Recommendations.Queries.GetProfessorSuggestionsForProject;
+namespace AcademicGateway.Application.Features.Professors.Queries.GetProfessorSuggestionsForProject;
 
 /// <summary>
 /// Handles the execution of the <see cref="GetProfessorSuggestionsForProjectQuery"/> request.

@@ -2,7 +2,7 @@
 using AcademicGateway.Application.Features.Skills.Queries.GetSkills;
 using MediatR;
 
-namespace AcademicGateway.Application.Features.Recommendations.Queries.GetSkillRecommendationsForStudent;
+namespace AcademicGateway.Application.Features.Skills.Queries.GetSkillRecommendationsForStudent;
 
 /// <summary>
 /// CQRS Query to retrieve vector-matched, AI-ranked adjacent skill recommendations for the authenticated student.

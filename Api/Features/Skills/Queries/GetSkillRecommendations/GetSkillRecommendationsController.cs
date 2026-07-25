@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AcademicGateway.Domain.Common.Constants;
-using AcademicGateway.Application.Features.Recommendations.Queries.GetSkillRecommendationsForStudent;
+using AcademicGateway.Application.Features.Skills.Queries.GetSkillRecommendationsForStudent;
 using AcademicGateway.Application.Features.Skills.Queries.GetSkills;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AcademicGateway.Api.Features.Recommendations.Queries.GetSkillRecommendations;
+namespace AcademicGateway.Api.Features.Skills.Queries.GetSkillRecommendations;
 
 /// <summary>
 /// Endpoint for fetching adjacent technical skill recommendations for student profile development.

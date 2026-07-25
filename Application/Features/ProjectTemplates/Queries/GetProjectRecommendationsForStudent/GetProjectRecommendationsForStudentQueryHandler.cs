@@ -10,7 +10,7 @@ using AcademicGateway.Domain.ProjectTemplates.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace AcademicGateway.Application.Features.Recommendations.Queries.GetProjectRecommendationsForStudent;
+namespace AcademicGateway.Application.Features.ProjectTemplates.Queries.GetProjectRecommendationsForStudent;
 
 /// <summary>
 /// Handles the execution of the <see cref="GetProjectRecommendationsForStudentQuery"/> request.

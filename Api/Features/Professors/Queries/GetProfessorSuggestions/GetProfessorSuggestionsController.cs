@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AcademicGateway.Domain.Common.Constants;
 using AcademicGateway.Application.Features.Professors.Queries.SearchProfessors;
-using AcademicGateway.Application.Features.Recommendations.Queries.GetProfessorSuggestionsForProject;
+using AcademicGateway.Application.Features.Professors.Queries.GetProfessorSuggestionsForProject;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AcademicGateway.Api.Features.Recommendations.Queries.GetProfessorSuggestions;
+namespace AcademicGateway.Api.Features.Professors.Queries.GetProfessorSuggestions;
 
 /// <summary>
 /// Endpoint for suggesting faculty advisors based on a project template blueprint.

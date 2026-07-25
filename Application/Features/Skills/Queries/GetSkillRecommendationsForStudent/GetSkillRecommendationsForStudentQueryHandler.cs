@@ -9,7 +9,7 @@ using AcademicGateway.Application.Features.Skills.Queries.GetSkills;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace AcademicGateway.Application.Features.Recommendations.Queries.GetSkillRecommendationsForStudent;
+namespace AcademicGateway.Application.Features.Skills.Queries.GetSkillRecommendationsForStudent;
 
 /// <summary>
 /// Handles the execution of the <see cref="GetSkillRecommendationsForStudentQuery"/> request.

@@ -2,13 +2,13 @@
 using System.Threading.Tasks;
 using AcademicGateway.Domain.Common.Constants;
 using AcademicGateway.Application.Features.ProjectTemplates.Queries.GetApprovedTemplates;
-using AcademicGateway.Application.Features.Recommendations.Queries.GetProjectRecommendationsForStudent;
+using AcademicGateway.Application.Features.ProjectTemplates.Queries.GetProjectRecommendationsForStudent;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AcademicGateway.Api.Features.Recommendations.Queries.GetProjectRecommendations;
+namespace AcademicGateway.Api.Features.ProjectTemplates.Queries.GetProjectRecommendations;
 
 /// <summary>
 /// Endpoint for fetching AI-powered project template recommendations for authenticated students.

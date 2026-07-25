@@ -2,7 +2,7 @@
 using AcademicGateway.Application.Features.ProjectTemplates.Queries.GetApprovedTemplates;
 using MediatR;
 
-namespace AcademicGateway.Application.Features.Recommendations.Queries.GetProjectRecommendationsForStudent;
+namespace AcademicGateway.Application.Features.ProjectTemplates.Queries.GetProjectRecommendationsForStudent;
 
 /// <summary>
 /// CQRS Query to retrieve vector-matched, AI-ranked project template recommendations tailored for the authenticated student.
