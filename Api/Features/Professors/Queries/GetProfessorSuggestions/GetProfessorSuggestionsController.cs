@@ -15,9 +15,9 @@ namespace AcademicGateway.Api.Features.Professors.Queries.GetProfessorSuggestion
 /// Endpoint for suggesting faculty advisors based on a project template blueprint.
 /// </summary>
 [ApiController]
-[Tags("Recommendations")]
+[Tags("Professors")]
 [Authorize(Roles = Roles.Student)]
-[Route("api/v1/recommendations/professors")]
+[Route("api/v1/professors/suggestions")]
 public class GetProfessorSuggestionsController(ISender mediator) : ControllerBase
 {
     /// <summary>

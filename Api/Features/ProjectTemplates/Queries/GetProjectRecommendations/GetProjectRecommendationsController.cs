@@ -14,9 +14,9 @@ namespace AcademicGateway.Api.Features.ProjectTemplates.Queries.GetProjectRecomm
 /// Endpoint for fetching AI-powered project template recommendations for authenticated students.
 /// </summary>
 [ApiController]
-[Tags("Recommendations")]
+[Tags("Project Templates")]
 [Authorize(Roles = Roles.Student)]
-[Route("api/v1/recommendations/projects")]
+[Route("api/v1/project-templates/recommendations")]
 public class GetProjectRecommendationsController(ISender mediator) : ControllerBase
 {
     /// <summary>

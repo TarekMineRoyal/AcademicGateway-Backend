@@ -14,9 +14,9 @@ namespace AcademicGateway.Api.Features.Skills.Queries.GetSkillRecommendations;
 /// Endpoint for fetching adjacent technical skill recommendations for student profile development.
 /// </summary>
 [ApiController]
-[Tags("Recommendations")]
+[Tags("Skills")]
 [Authorize(Roles = Roles.Student)]
-[Route("api/v1/recommendations/skills")]
+[Route("api/v1/skills/recommendations")]
 public class GetSkillRecommendationsController(ISender mediator) : ControllerBase
 {
     /// <summary>
