@@ -104,6 +104,11 @@ public interface IApplicationDbContext
     DbSet<TechSupportProposal> TechSupportProposals { get; }
 
     /// <summary>
+    /// Gets the database set tracking global research interest topic definitions.
+    /// </summary>
+    DbSet<ResearchInterest> ResearchInterests { get; }
+
+    /// <summary>
     /// Atomically flushes all tracked collection alterations, structural updates, and outstanding aggregate domain state mutations down to the relational persistence layer.
     /// </summary>
     /// <param name="cancellationToken">Propagates notification that network operations should be canceled.</param>

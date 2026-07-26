@@ -36,7 +36,7 @@ public record UpdateProfessorProfileCommand : IRequest
     public int MaxSupervisionCapacity { get; init; }
 
     /// <summary>
-    /// Gets the complete collection of fine-grained research interest tracking identifiers chosen by this professor.
+    /// Gets the complete collection of free-text research interest area names typed by this professor.
     /// Existing interest mappings not present in this collection will be cleanly removed.
     /// </summary>
     public IReadOnlyCollection<string> ResearchInterests { get; init; } = Array.Empty<string>();
