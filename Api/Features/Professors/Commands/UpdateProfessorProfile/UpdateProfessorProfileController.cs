@@ -4,7 +4,6 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,7 +16,8 @@ public record UpdateProfessorProfileRequest(
     string FullName,
     string Department,
     string Rank,
-    IReadOnlyCollection<Guid> ResearchInterestIds,
+    int MaxSupervisionCapacity,
+    IReadOnlyCollection<string> ResearchInterests,
     string? AboutMe);
 
 /// <summary>
@@ -47,7 +47,8 @@ public class UpdateProfessorProfileController(ISender mediator) : ControllerBase
             FullName = request.FullName,
             Department = request.Department,
             Rank = request.Rank,
-            ResearchInterestIds = request.ResearchInterestIds,
+            MaxSupervisionCapacity = request.MaxSupervisionCapacity,
+            ResearchInterests = request.ResearchInterests,
             AboutMe = request.AboutMe
         };
 

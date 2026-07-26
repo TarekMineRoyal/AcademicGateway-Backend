@@ -1,7 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace AcademicGateway.Application.Features.Professors.Commands.UpdateProfessorProfile;
 
@@ -36,8 +33,13 @@ public class UpdateProfessorProfileCommandValidator : AbstractValidator<UpdatePr
         RuleFor(x => x.MaxSupervisionCapacity)
             .GreaterThan(0).WithMessage("Altered maximum supervisor project capacity limit bounds must exceed zero.");
 
-        // Structural Collection Validations
-        RuleFor(x => x.ResearchInterestIds)
-            .Must(list => list == null || list.Count <= 15).WithMessage("You cannot assign more than 15 active research interest alignments to your profile.");
+        // Structural Collection Validations for Free-Text Research Interests
+        RuleFor(x => x.ResearchInterests)
+            .Must(list => list == null || list.Count <= 15)
+            .WithMessage("You cannot assign more than 15 active research interest alignments to your profile.");
+
+        RuleForEach(x => x.ResearchInterests)
+            .NotEmpty().WithMessage("Research interest area cannot be empty or whitespace.")
+            .MaximumLength(100).WithMessage("Research interest area cannot exceed 100 characters.");
     }
 }

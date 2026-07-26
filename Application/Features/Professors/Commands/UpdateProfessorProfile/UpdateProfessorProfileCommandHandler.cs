@@ -1,4 +1,5 @@
 ﻿using AcademicGateway.Application.Common.Interfaces;
+using AcademicGateway.Domain.Professors;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,7 +13,7 @@ namespace AcademicGateway.Application.Features.Professors.Commands.UpdateProfess
 /// <summary>
 /// Handles the transaction routine to process an <see cref="UpdateProfessorProfileCommand"/>.
 /// Resolves the professor aggregate via the secure session execution context, updates core faculty fields, 
-/// modifies mentoring capacities, synchronizes research interest matrices, and flushes states cleanly.
+/// modifies mentoring capacities, dynamically resolves free-text research interests, and flushes states cleanly.
 /// </summary>
 public class UpdateProfessorProfileCommandHandler(
     IApplicationDbContext context,
@@ -52,21 +53,52 @@ public class UpdateProfessorProfileCommandHandler(
         professor.UpdateSupervisionCapacity(request.MaxSupervisionCapacity);
         professor.UpdateAboutMe(request.AboutMe);
 
-        // 5. Synchronize Research Interest Alignments (DDD Differential Synchronization Pattern)
-        var targetInterests = request.ResearchInterestIds ?? Array.Empty<Guid>();
-        var currentInterests = professor.ResearchInterests.Select(ri => ri.ResearchInterestId).ToList();
+        // 5. Dynamic Resolution of Free-Text Research Interests
+        var targetAreas = (request.ResearchInterests ?? Array.Empty<string>())
+            .Where(area => !string.IsNullOrWhiteSpace(area))
+            .Select(area => area.Trim())
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
 
-        foreach (var interestId in targetInterests.Except(currentInterests))
+        var targetAreasLower = targetAreas.Select(a => a.ToLower()).ToList();
+
+        // Fetch pre-existing lookup categories matching typed interest strings
+        var existingInterests = await context.ResearchInterests
+            .Where(ri => targetAreasLower.Contains(ri.Area.ToLower()))
+            .ToListAsync(cancellationToken);
+
+        var targetInterestIds = new List<Guid>();
+
+        foreach (var area in targetAreas)
+        {
+            var existing = existingInterests.FirstOrDefault(ri => ri.Area.Equals(area, StringComparison.OrdinalIgnoreCase));
+            if (existing != null)
+            {
+                targetInterestIds.Add(existing.Id);
+            }
+            else
+            {
+                // Instantiate and track new global lookup entity for novel research areas
+                var newInterest = new ResearchInterest(area);
+                context.ResearchInterests.Add(newInterest);
+                targetInterestIds.Add(newInterest.Id);
+            }
+        }
+
+        // 6. Synchronize Research Interest Alignments (DDD Differential Synchronization Pattern)
+        var currentInterestIds = professor.ResearchInterests.Select(ri => ri.ResearchInterestId).ToList();
+
+        foreach (var interestId in targetInterestIds.Except(currentInterestIds))
         {
             professor.AddResearchInterest(interestId);
         }
 
-        foreach (var interestId in currentInterests.Except(targetInterests))
+        foreach (var interestId in currentInterestIds.Except(targetInterestIds))
         {
             professor.RemoveResearchInterest(interestId);
         }
 
-        // 6. Commit outstanding aggregate alterations atomically down to relational storage structures
+        // 7. Commit outstanding aggregate alterations atomically down to relational storage structures
         await context.SaveChangesAsync(cancellationToken);
     }
 }

@@ -39,5 +39,5 @@ public record UpdateProfessorProfileCommand : IRequest
     /// Gets the complete collection of fine-grained research interest tracking identifiers chosen by this professor.
     /// Existing interest mappings not present in this collection will be cleanly removed.
     /// </summary>
-    public IReadOnlyCollection<Guid> ResearchInterestIds { get; init; } = Array.Empty<Guid>();
+    public IReadOnlyCollection<string> ResearchInterests { get; init; } = Array.Empty<string>();
 }
